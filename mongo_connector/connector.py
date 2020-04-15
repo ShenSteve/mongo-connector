@@ -40,7 +40,6 @@ from mongo_connector.util import log_fatal_exceptions, retry_until_ok
 from mongo_connector.namespace_config import NamespaceConfig, validate_namespace_options
 from mongo_connector.version import Version
 
-
 # Monkey patch logging to add Logger.always
 ALWAYS = logging.CRITICAL + 10
 logging.addLevelName(ALWAYS, "ALWAYS")
@@ -1097,6 +1096,8 @@ def get_config_options():
                 package, klass = path.rsplit(".", 1)
                 module = __import__(package, fromlist=(package,))
                 dm_impl = getattr(module, klass)
+                # import mongo_connector.doc_managers.elastic2_doc_manager as elastic2_doc_manager
+                # dm_impl = elastic2_doc_manager.DocManager
                 if not issubclass(dm_impl, DocManagerBase):
                     raise TypeError("DocManager must inherit DocManagerBase.")
                 return dm_impl

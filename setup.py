@@ -55,6 +55,7 @@ setup(
         "elastic-aws": ["elastic-doc-manager[aws]"],
         "elastic2": ["elastic2-doc-manager[elastic2]"],
         "elastic5": ["elastic2-doc-manager[elastic5]"],
+        "elastic7": ["elastic2-doc-manager[elastic7]"],
         "elastic2-aws": ["elastic2-doc-manager[elastic2,aws]"],
     },
     setup_requires=[
