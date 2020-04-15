@@ -252,6 +252,10 @@ class OplogThread(threading.Thread):
                             " document number in this cursor is %d" % n
                         )
 
+                        LOG.always(
+                            "OplogThread: terating through cursor, n {n}, entry {entry}".format(n=n, entry=entry)
+                        )
+
                         skip, is_gridfs_file = self._should_skip_entry(entry)
                         if skip:
                             # update the last_ts on skipped entries to ensure
@@ -263,6 +267,7 @@ class OplogThread(threading.Thread):
                         # Sync the current oplog operation
                         operation = entry["op"]
                         ns = entry["ns"]
+
                         timestamp = util.bson_ts_to_long(entry["ts"])
                         for docman in self.doc_managers:
                             try:
